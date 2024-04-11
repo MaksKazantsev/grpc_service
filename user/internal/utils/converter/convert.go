@@ -30,30 +30,37 @@ type converter struct {
 }
 
 func (c converter) RegisterReqToService(req *users.RegisterReq) models.RegisterReq {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (c converter) LoginReqToService(req *users.LoginReq) models.LoginReq {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (c converter) ResetPasswordReqToService(req *users.ResetPasswordReq) models.ResetPasswordReq {
-	//TODO implement me
-	panic("implement me")
+	return models.RegisterReq{
+		Username:    req.Username,
+		Password:    req.Password,
+		Email:       req.Email,
+		PhoneNumber: req.PhoneNumber,
+	}
 }
 
 func (c converter) RegisterResToPb(res models.RegisterRes) *users.RegisterRes {
-	//TODO implement me
-	panic("implement me")
+	return &users.RegisterRes{
+		UUID:  res.UUID,
+		Token: res.Token,
+	}
+}
+
+func (c converter) LoginReqToService(req *users.LoginReq) models.LoginReq {
+	return models.LoginReq{
+		Email:    req.Email,
+		Password: req.Password,
+	}
 }
 
 func (c converter) LoginResToPb(token string) *users.LoginRes {
-	//TODO implement me
-	panic("implement me")
+	return &users.LoginRes{
+		Token: token,
+	}
 }
 
+func (c converter) ResetPasswordReqToService(req *users.ResetPasswordReq) models.ResetPasswordReq {
+	panic("implement me")
+}
 func (c converter) CheckIfAuthorizedResToPb(role string) *users.CheckIfAuthorizedRes {
 	//TODO implement me
 	panic("implement me")
