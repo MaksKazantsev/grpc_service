@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/MaksKazantsev/grpc_service/proto/gen/users";
+
+service User {
+  rpc Register(RegisterReq) returns(RegisterRes);
+  rpc Login(LoginReq) returns(LoginRes);
+  rpc CheckIfAuthorized(CheckIfAuthorizedReq) returns(CheckIfAuthorizedRes);
+  rpc ResetPassword(ResetPasswordReq) returns(google.protobuf.Empty);
+  rpc GetInfo(GetInfoReq) returns(GetInfoRes);
+  rpc SwitchStatusNotifications(SwitchNotificationsStatusReq) returns(google.protobuf.Empty);
+}
+
+message RegisterReq {
+  string Username = 1;
+  string Password = 2;
+  string Email = 3;
+  string PhoneNumber = 4;
+}
+
+message RegisterRes {
+  string UUID = 1;
+  string Token = 2;
+}
+
+message CheckIfAuthorizedReq {
+  string Token = 1;
+}
+
+message CheckIfAuthorizedRes {
+  bool IsAuthorized = 1;
+  string PermissionsLevel = 2;
+}
+
+message LoginReq {
+  string Email = 1;
+  string Password = 2;
+}
+
+message LoginRes {
+  string Token = 1;
+}
+
+message GetInfoReq {
+  string UUID = 1;
+}
+
+message GetInfoRes {
+  string Username = 1;
+  bool NotificationsOn = 2;
+}
+
+message SwitchNotificationsStatusReq {
+  string UUID = 1;
+}
+
+message ResetPasswordReq {
+  string OldPassword = 1;
+  string NewPassword = 2;
+  string Token = 3;
+}
